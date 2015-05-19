@@ -1,4 +1,4 @@
-# Local Subdomain
+# local-subdomain: Subdomain support for localhost
 
 ## Description
 
@@ -23,7 +23,10 @@ end
 ```
 
 **NOTE:** Do not force the gem only to be included in the `development` group. Because of the inclusion of the module `LocalSubdomain`, you'll need to have the gem available in every environment.
-The gem itself contains guards to only perform changes when the environment is `development`, so no worries.
+The gem itself contains guards to only perform changes when the environment is `development`, so no worries or check it out yourself:
+
+- [rack/handler.rb](/lib/local-subdomain/rack/handler.rb#L18)
+- [filters/local_subdomain.rb](/lib/local-subdomain/filters/local_subdomain.rb#L9)
 
 ## What it does
 
