@@ -14,8 +14,8 @@ module LocalSubdomain
     return if served_by_lvh_me
 
     http = request.env['rack.url_scheme']
-    port = request.env['SERVER_PORT']
+    port = ENV["SERVER_REDIRECT_PORT"] || request.env['SERVER_PORT']
     path = request.env['ORIGINAL_FULLPATH']
-    redirect_to "#{http}://#{redirect_domain}:#{port}#{path}"
+    redirect_to "#{http}://#{redirect_domain}#{port == 80 ? '' : port}#{path}"
   end
 end
