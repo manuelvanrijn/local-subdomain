@@ -7,12 +7,15 @@ module LocalSubdomain
 
   def redirect_to_lvh_me
     return unless Rails.env.development?
-    served_by_lvh_me = !request.env['SERVER_NAME'][/lvh.me$/].nil?
+
+    redirect_domain = ENV["SERVER_REDIRECT_DOMAIN"] || 'lvh.me'
+
+    served_by_lvh_me = !request.env['SERVER_NAME'][/#{redirect_domain}$/].nil?
     return if served_by_lvh_me
 
     http = request.env['rack.url_scheme']
     port = request.env['SERVER_PORT']
     path = request.env['ORIGINAL_FULLPATH']
-    redirect_to "#{http}://lvh.me:#{port}#{path}"
+    redirect_to "#{http}://#{redirect_domain}:#{port}#{path}"
   end
 end
