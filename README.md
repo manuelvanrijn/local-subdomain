@@ -28,16 +28,25 @@ The gem itself contains guards to only perform changes when the environment is `
 - [rack/handler.rb](/lib/local-subdomain/rack/handler.rb#L18)
 - [filters/local_subdomain.rb](/lib/local-subdomain/filters/local_subdomain.rb#L9)
 
+## Configuration (optional)
+
+By default the gem uses the domain `lvh.me` with the port used, when running the rails server, but it is also possible to provide a custom redirect domain and port using the following `ENV` variables:
+
+| ENV                      | Notes                            |EXAMPLE        |
+| :------------------------| :--------------------------------|-------------- |
+| `SERVER_REDIRECT_PORT`   | The port number to redirect to   | 5000          |
+| `SERVER_REDIRECT_DOMAIN` | The domain to redirect to        | my.domain.tld |
+
 ## What it does
 
 Basically it does two things:
 
 1. Extends the `Rack::Handler` to make sure we bind to `0.0.0.0` instead of `localhost`
-2. Adds the `LocalSubdomain` module which executes a `before_filter` to redirect to `http://lvh.me:<port>`
+2. Adds the `LocalSubdomain` module which executes a `before_filter` to redirect to `http://lvh.me:<port>` (or the configured redirect domain and port)
 
 ### Rack::Handler
 
-This gem uses the domain [http://lvh.me](http://lvh.me) to handle our requests for our subdomain(s). Request to the domain redirects all to `127.0.0.1`.
+By default, this gem uses the domain [http://lvh.me](http://lvh.me) to handle our requests for our subdomain(s). Request to the domain `lvh.me` redirects all requests to `127.0.0.1`.
 This give's us the ability to browse to [http://subsub.lvh.me:3000](http://subsublvh.me:3000) and be handle `request.subdomain` from our controllers.
 
 Because we're going to use the external domain [http://lvh.me](http://lvh.me) which redirects to `127.0.0.1` we have to make our server not to bind to `localhost` only.
