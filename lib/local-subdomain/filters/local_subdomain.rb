@@ -2,7 +2,7 @@ module LocalSubdomain
   extend ActiveSupport::Concern
 
   included do
-    before_filter :redirect_to_lvh_me
+    before_action :redirect_to_lvh_me
   end
 
   def redirect_to_lvh_me

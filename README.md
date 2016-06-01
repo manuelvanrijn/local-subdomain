@@ -42,7 +42,7 @@ By default the gem uses the domain `lvh.me` with the port used, when running the
 Basically it does two things:
 
 1. Extends the `Rack::Handler` to make sure we bind to `0.0.0.0` instead of `localhost`
-2. Adds the `LocalSubdomain` module which executes a `before_filter` to redirect to `http://lvh.me:<port>` (or the configured redirect domain and port)
+2. Adds the `LocalSubdomain` module which executes a `before_action` to redirect to `http://lvh.me:<port>` (or the configured redirect domain and port)
 
 ### Rack::Handler
 
@@ -53,7 +53,7 @@ Because we're going to use the external domain [http://lvh.me](http://lvh.me) wh
 
 ### LocalSubdomain module
 
-This module includes a `before_filter` which will check if the request is served by [http://lvh.me](http://lvh.me). If not it will redirect to the domain.
+This module includes a `before_action` which will check if the request is served by [http://lvh.me](http://lvh.me). If not it will redirect to the domain.
 
 So when we browse to [http://localhost:3000](http://localhost:3000) it will redirect you to [http://lvh.me:3000](http://lvh.me:3000)
 
