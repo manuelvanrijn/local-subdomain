@@ -7,6 +7,7 @@ module LocalSubdomain
 
   def redirect_to_lvh_me
     return unless Rails.env.development?
+    return if respond_to?(:skip_redirect?) && skip_redirect?
 
     redirect_domain = ENV['SERVER_REDIRECT_DOMAIN'] || 'lvh.me'
 
