@@ -19,7 +19,7 @@ module Rack
             message(options[:Port])
             options.merge!(Host: '0.0.0.0')
           end
-          orig_run(app, options)
+          orig_run(app, **options)
         end
 
         def self.message(port)
